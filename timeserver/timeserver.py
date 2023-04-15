@@ -1,20 +1,8 @@
 import configparser
-import datetime
-import socket
-import sys
-import time
 from argparse import ArgumentParser
 
 from NTPPacket import *
 from NTPServer import NTPServer
-
-
-class SectionError(Exception):
-    pass
-
-
-class PropertyError(Exception):
-    pass
 
 
 section_key = 'server'
@@ -35,7 +23,8 @@ def main(filename: str):
 
 
 if __name__ == '__main__':
-    parser = ArgumentParser(description='ОПИСАНИЕ')  # TODO
+    parser = ArgumentParser(
+        description='Сервер времени, который \"врет\" на заданное число секунд.')
     parser.add_argument(
         "-f", "--file", type=str, default='config.ini', help='config file')
     args = parser.parse_args()
@@ -44,4 +33,3 @@ if __name__ == '__main__':
     except FileNotFoundError:
         print(f'Файл {args.file} не найден.')
         exit(1)
-

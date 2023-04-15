@@ -49,14 +49,12 @@ class NTPPacket:
 
     def pack(self):
         return struct.pack(NTPPacket._FORMAT,
-                           (self.leap_indicator << 6) +
-                           (self.version << 3) + self.mode,
-                           self.stratum,
-                           self.pool,
-                           self.precision,
+                           ((self.leap_indicator << 6) + (self.version << 3) + self.mode).to_bytes(1, 'big'),
+                           self.stratum.to_bytes(1, 'big'),
+                           self.pool.to_bytes(1, 'big'),
+                           self.precision.to_bytes(1, 'big'),
                            int(self.root_delay) + get_fraction(self.root_delay, 16),
-                           int(self.root_dispersion) +
-                           get_fraction(self.root_dispersion, 16),
+                           int(self.root_dispersion) + get_fraction(self.root_dispersion, 16),
                            self.ref_id,
                            int(self.reference),
                            get_fraction(self.reference, 32),

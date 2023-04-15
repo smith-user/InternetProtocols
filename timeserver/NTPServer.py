@@ -18,11 +18,12 @@ class NTPServer:
 
     def run(self):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.bind((self.host, self.port))
             while True:
                 self.new_conn(s, *s.recvfrom(48))
 
     def new_conn(self, server: socket, data: bytes, addr):
-        print("Connection from {0}".format(addr))
+        print(f'Connection from {addr}')
 
         request_from_clinet = NTPPacket()
         time_receive = time.time()
@@ -41,7 +42,7 @@ class NTPServer:
             leap_indicator=response_from_server.leap_indicator,
             version=response_from_server.version,
             mode=response_from_server.mode,
-            stratum=response_from_server.stratum + 1,
+            stratum=int(response_from_server.stratum) + 1,
             pool=response_from_server.pool,
             precision=response_from_server.precision,
             root_delay=response_from_server.root_delay,
