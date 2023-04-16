@@ -32,7 +32,7 @@ class NTPPacket:
                  reference=0,
                  originate=0,
                  receive=0,
-                 transmit=time.time() + FORMAT_DIFF):
+                 transmit=-1):
         self.leap_indicator = leap_indicator
         self.version = version
         self.mode = mode
@@ -45,25 +45,28 @@ class NTPPacket:
         self.reference = reference
         self.originate = originate
         self.receive = receive
-        self.transmit = transmit
+        if transmit == -1:
+            self.transmit = time.time() + FORMAT_DIFF
+        else:
+            self.transmit = transmit
 
     def pack(self):
         return struct.pack(NTPPacket._FORMAT,
-                           ((self.leap_indicator << 6) + (self.version << 3) + self.mode).to_bytes(1, 'big'),
-                           self.stratum.to_bytes(1, 'big'),
-                           self.pool.to_bytes(1, 'big'),
-                           self.precision.to_bytes(1, 'big'),
+                           (self.leap_indicator << 6) + (self.version << 3) + self.mode,
+                           self.stratum,
+                           self.pool,
+                           self.precision,
                            int(self.root_delay) + get_fraction(self.root_delay, 16),
                            int(self.root_dispersion) + get_fraction(self.root_dispersion, 16),
                            self.ref_id,
-                           int(self.reference),
-                           get_fraction(self.reference, 32),
-                           int(self.originate),
-                           get_fraction(self.originate, 32),
-                           int(self.receive),
-                           get_fraction(self.receive, 32),
-                           int(self.transmit),
-                           get_fraction(self.transmit, 32))
+                           int(self.reference) % (2 ** 32),
+                           get_fraction(self.reference, 32) % (2 ** 32),
+                           int(self.originate) % (2 ** 32),
+                           get_fraction(self.originate, 32) % (2 ** 32),
+                           int(self.receive) % (2 ** 32),
+                           get_fraction(self.receive, 32) % (2 ** 32),
+                           int(self.transmit) % (2 ** 32),
+                           get_fraction(self.transmit, 32) % (2 ** 32))
 
     def unpack(self, data: bytes):
         unpacked_data = struct.unpack(NTPPacket._FORMAT, data)
@@ -98,7 +101,7 @@ class NTPPacket:
 
     def to_display(self):
         return "Leap indicator: {0.leap_indicator}\n" \
-               "Version number: {0.version_number}\n" \
+               "Version number: {0.version}\n" \
                "Mode: {0.mode}\n" \
                "Stratum: {0.stratum}\n" \
                "Pool: {0.pool}\n" \
