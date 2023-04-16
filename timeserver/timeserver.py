@@ -26,7 +26,7 @@ if __name__ == '__main__':
     parser = ArgumentParser(
         description='Сервер времени, который \"врет\" на заданное число секунд.')
     parser.add_argument(
-        "-f", "--file", type=str, default='config.ini', help='config file')
+        "-f", "--file", type=str, default='config.ini', help='файл с конфигурацией')
     args = parser.parse_args()
     try:
         main(args.file)

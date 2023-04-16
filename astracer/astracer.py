@@ -61,7 +61,13 @@ def main(args):
 
 
 if __name__ == '__main__':
-    parser = ArgumentParser(description='ОПИСАНИЕ')
+    parser = ArgumentParser(
+        description='Трассировка автономных систем. '
+                    'Пользователь вводит доменное имя или IP адрес. '
+                    'Осуществляется трассировка до указанного узла и'
+                    'определяется к какой автономной системе, стране'
+                    ' и провайдеру относится каждый из полученных'
+                    ' IP адресов маршрутизаторов.')
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-i", "--ipaddr", type=str, help='ip-адрес')
     group.add_argument("-d", "--domain", type=str, help='доменное имя')
