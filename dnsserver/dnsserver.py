@@ -80,8 +80,8 @@ parser.add_argument('--host', default='127.0.0.1', type=str,
                     help='Start proxy on host, default=127.0.0.1')
 parser.add_argument('-s', '--server', type=str, default='8.8.8.8',
                     help='DNS server address.')
-parser.add_argument('-c', '--cache', default='cache', type=str,
-                    help='Cache filename.')
+parser.add_argument('-c', '--cache',  type=str, default='cache',
+                    help='Cache filename, default=cache')
 
 
 async def main():
