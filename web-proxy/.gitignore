@@ -1,0 +1,16 @@
+# Auto-generated files:
+/venv/
+/.idea/
+/.pytest_cache
+__pycache__
+/tests/.pytest_cache
+.coverage
+/tests/testdir
+/testdir
+
+# Certificates and keys
+cert.pem
+/openssl
+
+# User data
+/passwords
