@@ -1,9 +1,10 @@
 # Web Proxy
 
 ## Описание
-Веб-прокси с поддержкой http и https.
+Веб-прокси с поддержкой HTTP и HTTPS.
 
 Приложение выполняет функции web-proxy сервера.
+Прокси сервер слушает порт, например, 8080.
 В файл `./passwords/password.json` будут сохраняться 
 учетные данные, введенные пользователями.
 
@@ -27,6 +28,11 @@ python3 -m proxy
 
 ## Пример:
 `python3 -m proxy --host 0.0.0.0 -p 8080`
+
+
+https://github.com/smith-user/InternetProtocols/assets/91221035/cd1b81a8-54bb-4dfe-aa44-d35ce9d1e8cf
+
+
 
 ## Инструкция:
 Справка по запуску:
