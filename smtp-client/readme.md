@@ -1,4 +1,4 @@
-# Web Proxy
+# SMTP client
 
 ## Описание
 SMTP клиент. В конфигурационном файле пользователь задает адрес получателя(лей), 
@@ -10,6 +10,9 @@ python3 smtpclient.py -i client.ini
 ```
 
 ## Пример:
+
+https://github.com/smith-user/InternetProtocols/assets/91221035/6aea87fc-cd25-4fe2-b779-e614ec98706e
+
 
 
 
